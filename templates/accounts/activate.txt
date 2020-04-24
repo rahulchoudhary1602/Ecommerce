@@ -1,0 +1,4 @@
+Hello 
+Please activate your email 
+{{ activation_url }}
+thank you 

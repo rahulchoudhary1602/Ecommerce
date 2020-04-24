@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Cart home page </h1>
+<div class="col-sm-8 col-sm-offset-2">
+    <table class="table">
+        <thead>
+            <th>Item</th>
+            <th>Price</th>
+            <th>QTY</th>
+        </thead>
+        <tfoot>
+
+        </tfoot>
+        {% for iten in Query %}
+
+
+
+        <tr>
+            <td> {{iten.Product.title}} <br />
+                <ul> {% for item in iten.variations %}<li>{item.title}</li> {% endfor %}
+                </ul> {{iten.notes}}
+            </td>
+            <td> {{iten.Product.price}}</td>
+            <td> {{iten.quantity}}</td>
+            <td>
+                <a href="{% url 'carts:updatecart' iten.Product.slug   %}?qty=0"> Remove</a>
+            </td>
+        </tr>
+
+
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td>total : {{ total }}</td>
+        </tr>
+    </table>
+    <a href="{% url 'orders:order' %}"> Proceed to buy</a>
+</div>
+{% endblock body%}

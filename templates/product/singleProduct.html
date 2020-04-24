@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="col sm-4">
+        {% for item in image %}
+        <div class=" col">
+            <img class="img-responsive" src="{{item.image.url}}" width="100px" height="200px" />
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-sm-4 ">
+        <div>
+            <div class="col-sm-8">
+                <h1>{{ Product.title }} </h1>
+                <br />
+            </div>
+            <div class="col-sm-8 pull-right ">
+
+                <form action="{% url 'carts:updatecart'  Product.slug  %}" method="GET">
+
+                    <input class="btn btn-primary btn-block btn-default" type="submit" value="Add to cart " />
+                    <input class="form-control" type="number" name="qty" placeholder="1" />
+
+                    {% if sizes %}
+                    <select class="form-control" name="size">
+                        {% for item in sizes %}
+
+                        <option value="{{item.title}}">{{item.title}}</option>
+
+                        {% endfor %}
+                    </select>
+
+                    {% endif %}
+                    {% if colors %}
+                    <select class="form-control" name="color">
+                        {% for item in colors %}
+
+                        <option value="{{item.title}}">{{item.title}}</option>
+
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+
+                    <!-- <select class="form-control" name="color">
+                        <option value="red">Red</option>
+                        <option value="blue">Blue</option>
+                        <option value="black">Black</option>
+                    </select>
+                    <select class="form-control" name="size">
+                        <option value="small">Sm</option>
+                        <option value="medium">Med</option>
+                        <option value="large">Large</option>
+                    </select> -->
+                </form>
+            </div>
+        </div>
+        <hr />
+        <h5>Price : {{ Product.price}}</h5>
+        <p>{{ Product.description }} </p>
+
+    </div>
+</div>
+{% endblock body%}
